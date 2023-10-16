@@ -1,0 +1,10 @@
+Grading		
+Description Section	3	/3
+Reference Section	3	/3
+Implementation Section	3	/3
+Contributions	1	/1
+Total:	10	/10
+		
+Comments:		
+Looks good-- a little vague on the specifics for the implementation. 
+Make sure to test it out with your own images. 
