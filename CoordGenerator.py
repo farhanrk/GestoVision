@@ -6,13 +6,13 @@ import cv2
 import matplotlib.pyplot as plt
 
 #put the location of the kaggle dataset here
-DATA_DIRECTORY = './data/alphabet_train'
+DATA_DIRECTORY = "./data\\alphabet_train"
 
 cap = cv2.VideoCapture(0)
 
 mp_hands = mp.solutions.hands
 
-hands = mp_hands.Hands(static_image_mode=True, min_detection_confidence=0.3) #because we're using photos to train
+hands = mp_hands.Hands(static_image_mode=True, min_detection_confidence=0.3, model_complexity=1) #because we're using photos to train
 
 data = []
 labels = []
@@ -20,7 +20,8 @@ labels = []
 for letter_label in os.listdir(DATA_DIRECTORY):
     #iterating through all the photos inside the folder A or B or...
     for img_path in os.listdir(os.path.join(DATA_DIRECTORY, letter_label)):
-
+        
+        print("Working with "+str(letter_label)+" picture no: "+str(img_path))
         curr_landmark_coord = []
         xList = []
         yList = []
@@ -40,18 +41,19 @@ for letter_label in os.listdir(DATA_DIRECTORY):
 
                     xList.append(x)
                     yList.append(y)
-
+                print("Working with "+str(letter_label)+" picture no: "+str(img_path)+" x and y found.")
                 for i in range(len(hand_landmarks.landmark)):
                     x = hand_landmarks.landmark[i].x
                     y = hand_landmarks.landmark[i].y
                     #because we only need the relative positions of the landmarks, doesn't matter where in the picture they're in
                     curr_landmark_coord.append(x - min(xList))
                     curr_landmark_coord.append(y - min(yList))
+                print("Working with "+str(letter_label)+" picture no: "+str(img_path)+" data created.")
 
             data.append(curr_landmark_coord)
             labels.append(letter_label)
 
 #saving it all in a pickle file
-f = open('data.pickle', 'wb')
+f = open('./data.pickle', 'wb')
 pickle.dump({'data': data, 'labels': labels}, f)
 f.close()
