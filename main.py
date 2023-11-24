@@ -23,7 +23,11 @@ import mediapipe as mp
 ##
 ##  So far, the mapping becomes slower because of image processing
 ##
-##
+##  Steps:
+##      1. Image Processing
+##      2. Crop it out to only hand for efficiency (not cropping the video feed, but working with the cropped part)
+##      3. Generate Landmarks
+##      4. Train, classify, detect
 ##
 #################################################################################################
 
@@ -39,66 +43,15 @@ def main():
         success, img = cap.read()
         if not success:
             break
-        # img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-        # # Image processing
-        # imgHeight = img.shape[0]
-        # imgWidth = img.shape[1]
-        # #Padding the image 
-        # #creating a new image with an additional border of 1
-        # paddedImg = np.zeros((imgHeight+2, imgWidth+2), dtype=np.uint8)
-        # #Copying the original image to the center of the new image
-        # for x in range(imgWidth):
-        #     for y in range(imgHeight):
-        #         paddedImg[y + 1][x + 1] = img[y][x]
-
-        # #creating a canvas for the blurred image
-        # blurred = np.zeros((imgHeight+2, imgWidth+2), dtype=np.uint8)
-        # #Using a 3x3 averaging mask to blur the image
-        # blurrer = np.ones((3, 3), np.float32) / 9
-        # for x in range(1, paddedImg.shape[1] - 1):
-        #     for y in range(1, paddedImg.shape[0] - 1):
-        #         sum = 0
-        #         for i in [-1,0,1]:
-        #             for j in [-1,0,1]:
-        #                 sum += blurrer[j + 1][i + 1] * paddedImg[y + j][x + i]
-        #         blurred[y][x] = sum
-
-        # #Removing the padding
-        # blurr = np.zeros((imgHeight, imgWidth), dtype=np.uint8)
-        # for x in range(imgWidth):
-        #     for y in range(imgHeight):
-        #         blurr[y][x] = blurred[y+1][x+1]
-
-        # #Calculating the mask
-        # mask = np.subtract(img,blurr,dtype=np.longlong)
-        # #Ensuring the pixel values are in the [0, 255] range
-        # for y in range(imgHeight):
-        #     for x in range(imgWidth):
-        #         if mask[y][x] < 0:
-        #             mask[y][x] = 0
-        #         elif mask[y][x] > 255:
-        #             mask[y][x] = 255
-
-        # #Sharpening the image by adding the mask
-        # sharpImg = np.add(img,mask,dtype=np.longlong)
-        # #Ensuring the pixel values are in the [0, 255] range
-        # for y in range(imgHeight):
-        #     for x in range(imgWidth):
-        #         if sharpImg[y][x] < 0:
-        #             sharpImg[y][x] = 0
-        #         elif sharpImg[y][x] > 255:
-        #             sharpImg[y][x] = 255
-
-        # sharpImg = sharpImg.astype(np.uint8)
-
-        # Apply sharpening with kernal for rgb
-        kernel = np.array([[-1, -1, -1],
-                        [-1,  9, -1],
-                        [-1, -1, -1]])
-        sharpImg = cv2.filter2D(img, -1, kernel)
+        
+        ############################||Apply sharpening with kernal for rgb
+        # kernel = np.array([[-1, -1, -1],
+        #                 [-1,  9, -1],
+        #                 [-1, -1, -1]])
+        # sharpImg = cv2.filter2D(img, -1, kernel)
 
         # Process the image and get hand landmarks
-        results = hands.process(sharpImg)
+        results = hands.process(img)
 
         # Draw landmarks on the image
         if results.multi_hand_landmarks:
