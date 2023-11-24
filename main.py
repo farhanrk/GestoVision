@@ -11,9 +11,8 @@
 #####################################||IMPORTING LIBRARIES||#####################################
 import cv2
 import numpy as np
-import math
-from matplotlib import pyplot as plt
 import mediapipe as mp
+import pickle
 
 ############################################||NOTES||############################################
 ##
@@ -28,38 +27,48 @@ import mediapipe as mp
 #################################################################################################
 
 def main():
+    # Load the model first
+    model = pickle.load(open("model.pickle", "rb"))
+
+    # Setup media pipe
     mp_hands = mp.solutions.hands
     mp_drawing = mp.solutions.drawing_utils
     #mp_drawing_styles = mp.solutions.drawing_styles
-    # Initialize MediaPipe Hands
-    hands = mp_hands.Hands(min_detection_confidence=0.35)
+
     # Initialize media capture
     cap = cv2.VideoCapture(0)
-    while True:
-        # Get frame
-        success, img = cap.read()
-        if not success:
-            break
+    with mp_hands.Hands(min_detection_confidence=0.35,
+                        min_tracking_confidence=0.35) as hands:
+        while cap.isOpened():
+            # Get frame
+            success, img = cap.read()
+            if not success:
+                print("Ignoring empty camera frame")
+                continue
 
-        ############################||Apply sharpening with kernal for rgb
-        # kernel = np.array([[-1, -1, -1],
-        #                 [-1,  9, -1],
-        #                 [-1, -1, -1]])
-        # sharpImg = cv2.filter2D(img, -1, kernel)
+            # Abiding by OpenCV's whims
+            img.flags.writeable = False
+            img= cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+            # Process the image and get hand landmarks
+            results = hands.process(img)
 
-        # Process the image and get hand landmarks
-        results = hands.process(img)
+            # Draw landmarks on the image
+            img.flags.writeable = True
+            img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
+            if results.multi_hand_landmarks:
+                for landmarks in results.multi_hand_landmarks:
+                    mp_drawing.draw_landmarks(img,
+                                              landmarks,
+                                              mp_hands.HAND_CONNECTIONS)
 
-        # Draw landmarks on the image
-        if results.multi_hand_landmarks:
-            for landmarks in results.multi_hand_landmarks:
-                mp_drawing.draw_landmarks(img, landmarks, mp_hands.HAND_CONNECTIONS)
+            # Displaying the video by frame
+            # Flip the image horizontally for a selfie-view display.
+            cv2.imshow("Press ESC to exit", cv2.flip(img, 1))
 
-        # Displaying the video by frame
-        cv2.imshow("Image", img)
-        key_press = cv2.waitKey(1)
-        if key_press == 27: # Exit on ESC
-            break
+            # Exit on ESC
+            key_press = cv2.waitKey(1)
+            if key_press == 27:
+                break
     cap.release()
     cv2.destroyAllWindows()
 
