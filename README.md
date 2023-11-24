@@ -9,4 +9,5 @@ A real-time Python application for American Sign Language gesture recognition, u
 <br>
 Reqired:<br>
 mediapipe==0.10.0
-
+opencv
+scikit-learn
