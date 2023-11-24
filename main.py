@@ -10,10 +10,6 @@
 ##
 #####################################||IMPORTING LIBRARIES||#####################################
 import cv2
-# import tkinter as tk
-# from tkinter import filedialog
-# from tkinter import simpledialog
-# from tkinter import messagebox
 import numpy as np
 import math
 from matplotlib import pyplot as plt
@@ -34,8 +30,9 @@ import mediapipe as mp
 def main():
     mp_hands = mp.solutions.hands
     mp_drawing = mp.solutions.drawing_utils
+    #mp_drawing_styles = mp.solutions.drawing_styles
     # Initialize MediaPipe Hands
-    hands = mp_hands.Hands()
+    hands = mp_hands.Hands(min_detection_confidence=0.35)
     # Initialize media capture
     cap = cv2.VideoCapture(0)
     while True:
@@ -43,7 +40,7 @@ def main():
         success, img = cap.read()
         if not success:
             break
-        
+
         ############################||Apply sharpening with kernal for rgb
         # kernel = np.array([[-1, -1, -1],
         #                 [-1,  9, -1],
@@ -60,8 +57,8 @@ def main():
 
         # Displaying the video by frame
         cv2.imshow("Image", img)
-        key_press = cv2.waitKey(100)
-        if not key_press == -1:
+        key_press = cv2.waitKey(1)
+        if key_press == 27: # Exit on ESC
             break
     cap.release()
     cv2.destroyAllWindows()
