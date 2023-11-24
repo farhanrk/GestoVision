@@ -37,7 +37,7 @@ def main():
 
     # Initialize media capture
     cap = cv2.VideoCapture(0)
-    with mp_hands.Hands(min_detection_confidence=0.35,
+    with mp_hands.Hands(max_num_hands=1, min_detection_confidence=0.35,
                         min_tracking_confidence=0.35) as hands:
         while cap.isOpened():
             # Get frame
@@ -52,6 +52,7 @@ def main():
             # Process the image and get hand landmarks
             results = hands.process(img)
 
+            curr_landmark_coord = []
             # Draw landmarks on the image
             img.flags.writeable = True
             img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
@@ -60,6 +61,16 @@ def main():
                     mp_drawing.draw_landmarks(img,
                                               landmarks,
                                               mp_hands.HAND_CONNECTIONS)
+                for hand_landmarks in results.multi_hand_landmarks:
+                    for i in range(len(hand_landmarks.landmark)):
+                        x = hand_landmarks.landmark[i].x
+                        y = hand_landmarks.landmark[i].y
+
+                        curr_landmark_coord.append(x)
+                        curr_landmark_coord.append(y)
+                prediction = model.predict([np.asarray(curr_landmark_coord)])
+                predicted_character = prediction[0]
+                print(predicted_character)
 
             # Displaying the video by frame
             # Flip the image horizontally for a selfie-view display.
