@@ -49,6 +49,8 @@ def main():
         while cap.isOpened():
             # Get frame
             success, img = cap.read()
+            kernel = np.array([[0, -1, 0], [-1, 5, -1], [0, -1, 0]])
+            img = cv2.filter2D(img, -1, kernel)
             if not success:
                 print("Ignoring empty camera frame")
                 continue
