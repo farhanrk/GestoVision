@@ -14,13 +14,14 @@ Required:<br>
 mediapipe==0.10.8<br>
 opencv==4.8.1.78<br>
 scikit-learn==1.3.2<br>
-numpy==1.26.2<br>      
+numpy==1.26.2<br>
+tkinter==8.6<br>         
 </blockquote>
 
 <br>
 <br>
 If you want to train your own model with your own photos, go through the files in sequence <code>coord_gen.py</code> &rarr; <code>model_trainer.py</code> &rarr; <code>main.py</code> <br>
-<li><h3>main.py</h3> 
+<h3>main.py</h3> 
 <p>This is our main program.</p>
 <blockquote>
 <br>
@@ -31,7 +32,7 @@ Or you can also run the file using an IDE like VSCode<br>
 <em>NOTE: Comment out line 36, uncomment line 35 and make sure it matches the directory for your data if tkinter is not working</em>
 <br>
 
-<li><h3>coord_gen.py</h3>
+<h3>coord_gen.py</h3>
 
 <p>This is the program to generate data (from pictures) on which we're going to train the model.</p>
 <br>
@@ -44,7 +45,7 @@ Or you can also run the file using an IDE like VSCode<br>
 </blockquote>
 <br>
 
-<li><h3>model_trainer.py</h3>
+<h3>model_trainer.py</h3>
 <p>This is where we train our model form the data created.</p>
 <blockquote>
 <br>
