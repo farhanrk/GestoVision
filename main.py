@@ -49,6 +49,8 @@ def main():
         while cap.isOpened():
             # Get frame
             success, img = cap.read()
+            kernel = np.array([[0, -1, 0], [-1, 5, -1], [0, -1, 0]])
+            img = cv2.filter2D(img, -1, kernel)
             if not success:
                 print("Ignoring empty camera frame")
                 continue
@@ -97,7 +99,7 @@ def main():
                 cv2.rectangle(img, (x1, y1), (x2, y2), (255, 0, 255), 2)
                 cv2.putText(img, predicted_character, (x1, y1 - 10), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 255), 2,
                             cv2.LINE_AA)
-                cv2.putText(img, "%.2f" % (np.max(accuracy) * 100), (x1 + 30, y1 - 10), cv2.FONT_HERSHEY_SIMPLEX, 1,
+                cv2.putText(img, "%.2f%%" % (np.max(accuracy) * 100), (x1 + 30, y1 - 10), cv2.FONT_HERSHEY_SIMPLEX, 1,
                             (255, 0, 200), 2,
                             cv2.LINE_AA)
 
