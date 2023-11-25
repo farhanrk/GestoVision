@@ -14,6 +14,7 @@ import numpy as np
 import mediapipe as mp
 import pickle
 
+
 ############################################||NOTES||############################################
 ##
 ##       main.py is handling the video feed and using the model to determine the alphabets
@@ -24,7 +25,7 @@ import pickle
 ##      2. Getting the video feed
 ##      3. Creating landmark coordinates for the hand in the feed with mediaPipe
 ##              model.pickle has been trained from a opensourse database on kaggle
-##                                    ||
+##                                   _||_
 ##                                   \  /
 ##                                    \/
 ##      4. Using previously trained model to determine hand gesture
@@ -39,7 +40,7 @@ def main():
     # Setup media pipe
     mp_hands = mp.solutions.hands
     mp_drawing = mp.solutions.drawing_utils
-    #mp_drawing_styles = mp.solutions.drawing_styles
+    # mp_drawing_styles = mp.solutions.drawing_styles
 
     # Initialize media capture
     cap = cv2.VideoCapture(0)
@@ -54,7 +55,7 @@ def main():
 
             # Abiding by OpenCV's whims
             img.flags.writeable = False
-            img= cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+            img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
             # Process the image and get hand landmarks
             results = hands.process(img)
 
@@ -82,14 +83,26 @@ def main():
                         curr_landmark_coord.append(x - min(xList))
                         curr_landmark_coord.append(y - min(yList))
 
+                # Rectangle bounds for the hand
+                x1 = int(min(xList) * img.shape[1]) - 10
+                y1 = int(min(yList) * img.shape[0]) - 10
+                x2 = int(max(xList) * img.shape[1]) - 10
+                y2 = int(max(yList) * img.shape[0]) - 10
+
                 prediction = model.predict([np.asarray(curr_landmark_coord)])
                 predicted_character = prediction[0]
                 accuracy = model.predict_proba([np.asarray(curr_landmark_coord)])
-                print(predicted_character, accuracy)
+
+                # Draw rectangle and put alphabet with accuracy
+                cv2.rectangle(img, (x1, y1), (x2, y2), (255, 0, 255), 2)
+                cv2.putText(img, predicted_character, (x1, y1 - 10), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 255), 2,
+                            cv2.LINE_AA)
+                cv2.putText(img, "%.2f" % (np.max(accuracy) * 100), (x1 + 30, y1 - 10), cv2.FONT_HERSHEY_SIMPLEX, 1,
+                            (255, 0, 200), 2,
+                            cv2.LINE_AA)
 
             # Displaying the video by frame
-            # Flip the image horizontally for a selfie-view display.
-            cv2.imshow("Press ESC to exit", cv2.flip(img, 1))
+            cv2.imshow("Press ESC to exit", img)
 
             # Exit on ESC
             key_press = cv2.waitKey(1)
