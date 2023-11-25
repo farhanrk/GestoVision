@@ -8,6 +8,7 @@ A real-time Python application for American Sign Language gesture recognition, u
 <br>
 <br>
 Reqired:<br>
-mediapipe==0.10.0<br>
-opencv<br>
-scikit-learn
+mediapipe==0.10.8<br>
+opencv==4.8.1.78<br>
+scikit-learn==1.3.2<br>
+numpy==1.26.2<br>
