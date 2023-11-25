@@ -53,6 +53,8 @@ def main():
             results = hands.process(img)
 
             curr_landmark_coord = []
+            xList = []
+            yList = []
             # Draw landmarks on the image
             img.flags.writeable = True
             img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
@@ -65,12 +67,19 @@ def main():
                     for i in range(len(hand_landmarks.landmark)):
                         x = hand_landmarks.landmark[i].x
                         y = hand_landmarks.landmark[i].y
+                        xList.append(x)
+                        yList.append(y)
 
-                        curr_landmark_coord.append(x)
-                        curr_landmark_coord.append(y)
+                    for i in range(len(hand_landmarks.landmark)):
+                        x = hand_landmarks.landmark[i].x
+                        y = hand_landmarks.landmark[i].y
+                        curr_landmark_coord.append(x - min(xList))
+                        curr_landmark_coord.append(y - min(yList))
+
                 prediction = model.predict([np.asarray(curr_landmark_coord)])
                 predicted_character = prediction[0]
-                print(predicted_character)
+                accuracy = model.predict_proba([np.asarray(curr_landmark_coord)])
+                print(predicted_character, accuracy)
 
             # Displaying the video by frame
             # Flip the image horizontally for a selfie-view display.
