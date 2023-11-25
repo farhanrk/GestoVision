@@ -61,6 +61,6 @@ Or you can also run the file using an IDE like VSCode<br>
         <p><strong>Title:</strong> ASL Alphabet</p>
         <p><strong>URL:</strong> <a href="https://www.kaggle.com/dsv/29550">https://www.kaggle.com/dsv/29550</a></p>
         <p><strong>DOI:</strong> <a href="https://doi.org/10.34740/KAGGLE/DSV/29550">10.34740/KAGGLE/DSV/29550</a></p>
-        <p><strong>Citation:</strong> @misc{https://www.kaggle.com/datasets/grassknoted/asl-alphabet/}</p>
+        <p><strong>Citation:</strong> https://www.kaggle.com/datasets/grassknoted/asl-alphabet/</p>
     </div>
 </blockquote>
