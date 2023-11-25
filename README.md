@@ -12,7 +12,7 @@ To run the program with the already trained model just run main.py and make sure
 Required:<br>
 <blockquote>
 mediapipe==0.10.8<br>
-opencv==4.8.1.78<br>
+opencv-python==4.8.1.78<br>
 scikit-learn==1.3.2<br>
 numpy==1.26.2<br>
 tkinter==8.6<br>         
@@ -21,15 +21,15 @@ tkinter==8.6<br>
 <br>
 <br>
 If you want to train your own model with your own photos, go through the files in sequence <code>coord_gen.py</code> &rarr; <code>model_trainer.py</code> &rarr; <code>main.py</code> <br>
+Otherwise just run <code>main.py</code> <br>
 <h3>main.py</h3> 
 <p>This is our main program.</p>
 <blockquote>
-<br>
 Run the file from terminal like so:<br>
 <code>python main.py</code> or <code>python3 main.py</code><br>
 Or you can also run the file using an IDE like VSCode<br>
 </blockquote>
-<em>NOTE: Comment out line 36, uncomment line 35 and make sure it matches the directory for your data if tkinter is not working</em>
+<em>NOTE: Comment out line 36, uncomment line 35 and make sure it matches the directory for your data if tkinter is not working.</em>
 <br>
 
 <h3>coord_gen.py</h3>
