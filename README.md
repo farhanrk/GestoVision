@@ -54,3 +54,11 @@ Run the file from terminal like so:<br>
 Or you can also run the file using an IDE like VSCode<br>
 </blockquote>
 <br>
+
+<h2> Acknowledgement </h2>
+<blockquote>
+@misc{https://www.kaggle.com/grassknoted/aslalphabet_akash nagaraj_2018 <br>
+title={ASL Alphabet} <br>
+url={https://www.kaggle.com/dsv/29550} <br>
+DOI={10.34740/KAGGLE/DSV/29550} <br>
+</blockquote>
