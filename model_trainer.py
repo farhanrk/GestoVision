@@ -1,8 +1,34 @@
+###################################________GestoVision________###################################
+##
+##  Project || CS 3301 - Visual Computing
+##  Group Name          : The Trainers
+##  Group Members(s)    : [Trishir Kumar Singh, Farhan Rahman Khan] 
+##  Name                : Trishir Kumar Singh
+##  Student ID          : 202023149
+##  Name                : Farhan Rahman Khan
+##  Student ID          : 202124798
+##
+#####################################||IMPORTING LIBRARIES||#####################################
 import pickle
 import numpy as np
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
+############################################||NOTES||############################################
+##
+##        model_trainer.py is where we train our model using the data previously created
+##                     with CoordGenerator.py and saved in data.pickle
+##                           we save the model in model.pickle
+##
+##  Steps:
+##      1. Load the data
+##      2. Convert data types
+##      3. Split training and test data
+##      4. Use RandomForest to classify
+##      5. Determine accuracy
+##      6. Save the model as model.pickle
+##
+#################################################################################################
 
 # Load the pickle and unpack it back into the dictionary
 landmark_coord_dict = pickle.load(open('./data.pickle', 'rb'))

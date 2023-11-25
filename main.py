@@ -16,13 +16,19 @@ import pickle
 
 ############################################||NOTES||############################################
 ##
-##  So far, the mapping becomes slower because of image processing
+##       main.py is handling the video feed and using the model to determine the alphabets
 ##
 ##  Steps:
+##      0. Train a model with data and save it (not in this code)
 ##      1. Image Processing
-##      2. Crop it out to only hand for efficiency (not cropping the video feed, but working with the cropped part)
-##      3. Generate Landmarks
-##      4. Train, classify, detect
+##      2. Getting the video feed
+##      3. Creating landmark coordinates for the hand in the feed with mediaPipe
+##              model.pickle has been trained from a opensourse database on kaggle
+##                                    ||
+##                                   \  /
+##                                    \/
+##      4. Using previously trained model to determine hand gesture
+##      5. Displaying the determined gesture on the feed
 ##
 #################################################################################################
 

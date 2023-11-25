@@ -1,19 +1,38 @@
+###################################________GestoVision________###################################
+##
+##  Project || CS 3301 - Visual Computing
+##  Group Name          : The Trainers
+##  Group Members(s)    : [Trishir Kumar Singh, Farhan Rahman Khan] 
+##  Name                : Trishir Kumar Singh
+##  Student ID          : 202023149
+##  Name                : Farhan Rahman Khan
+##  Student ID          : 202124798
+##
+#####################################||IMPORTING LIBRARIES||#####################################
 import os
 import pickle
-
 import mediapipe as mp
 import cv2
-import matplotlib.pyplot as plt
+############################################||NOTES||############################################
+##
+##              CoordGenerator.py is a file we use to generate the landmark coordinates
+##                                 and save it as data.pickle
+##
+##  Steps:
+##      1. Setting up neccesary objects and variables
+##      2. For each folder(represents one letter) itterate through each photo(each file)
+##      3. Creates the handlandmark coordinates and saves them along with their label(folder names)
+##      4. Dumps them all together and saves as data.pickle
+##
+#################################################################################################
+
+
 
 # put the location of the kaggle dataset here
 DATA_DIRECTORY = "./data"
 
-cap = cv2.VideoCapture(0)
-
 mp_hands = mp.solutions.hands
-
-hands = mp_hands.Hands(static_image_mode=True, min_detection_confidence=0.3,
-                       max_num_hands=1)  # because we're using photos to train
+hands = mp_hands.Hands(static_image_mode=True, min_detection_confidence=0.3, max_num_hands=1)  # because we're using photos to train
 
 data = []
 labels = []
