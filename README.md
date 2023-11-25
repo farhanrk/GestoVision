@@ -57,8 +57,10 @@ Or you can also run the file using an IDE like VSCode<br>
 
 <h2> Acknowledgement </h2>
 <blockquote>
-@misc{https://www.kaggle.com/grassknoted/aslalphabet_akash nagaraj_2018 <br>
-title={ASL Alphabet} <br>
-url={https://www.kaggle.com/dsv/29550} <br>
-DOI={10.34740/KAGGLE/DSV/29550} <br>
+<div>
+        <p><strong>Title:</strong> ASL Alphabet</p>
+        <p><strong>URL:</strong> <a href="https://www.kaggle.com/dsv/29550">https://www.kaggle.com/dsv/29550</a></p>
+        <p><strong>DOI:</strong> <a href="https://doi.org/10.34740/KAGGLE/DSV/29550">10.34740/KAGGLE/DSV/29550</a></p>
+        <p><strong>Citation:</strong> @misc{https://www.kaggle.com/datasets/grassknoted/asl-alphabet/}</p>
+    </div>
 </blockquote>
