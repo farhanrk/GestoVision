@@ -1,4 +1,5 @@
 <h1 align="center">COMP 3301 Project</h1>
+![GestoVisionLOGO](Logo-GestoVision.png)
 <h1 align="center">GestoVision</h1>
 <h3 align="center">Trishir Kumar Singh & Farhan Rahman Khan</h3><br>
 
