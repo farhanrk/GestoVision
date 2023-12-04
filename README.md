@@ -1,5 +1,5 @@
 <h1 align="center">COMP 3301 Project</h1>
-![Logo-GestoVision](https://github.com/MUN-McIntyre/course-project-comp-3301-project-trishir-farhanrk/assets/113522316/050c5160-9d2e-473c-afd2-e50393d20b0c)
+![GestoVisionLOGO](Logo-GestoVision.png)
 <h1 align="center">GestoVision</h1>
 <h3 align="center">Trishir Kumar Singh & Farhan Rahman Khan</h3><br>
 
