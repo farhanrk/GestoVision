@@ -1,5 +1,8 @@
 <h1 align="center">COMP 3301 Project</h1>
-![gestowithlogo](https://github.com/user-attachments/assets/fb14ee56-2893-4625-9c09-eab77f6f9782)
+<!-- ![gestowithlogo]() -->
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/fb14ee56-2893-4625-9c09-eab77f6f9782" alt="GestoVision Demo GIF with Logo">
+</p>
 <h1 align="center">GestoVision</h1>
 <h3 align="center">Trishir Kumar Singh & Farhan Rahman Khan</h3><br>
 
